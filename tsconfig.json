@@ -2,6 +2,6 @@
     "compilerOptions": {
         "rootDir": "./src",
         "outDir": "./dist",
-        "target": "ES6"
+        "target": "ES2015"
     }
 }

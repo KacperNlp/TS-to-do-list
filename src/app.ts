@@ -1,1 +1,3 @@
-console.log('Hello world11!');
+import Task from "./classes/Task";
+
+const task = new Task();

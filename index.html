@@ -7,7 +7,20 @@
     <link rel="stylesheet" href="./styles/output.css">
 </head>
 <body>
-    <h1 class="text-sm">To do List</h1>
-    <script src="./dist/app.js"></script>
+    <h1 class="text-xl">To do List</h1>
+    <section>
+        <form id="add-task">
+            <div>
+                <label for="task"></label>
+                <input type="text" id="task">
+            </div>
+
+            <button>Add new Task</button>
+        </form>
+    </section>
+    <section>
+        <ul id="tasks-list"></ul>
+    </section>
+    <script src="./dist/app.js" type="module"></script>
 </body>
 </html>
