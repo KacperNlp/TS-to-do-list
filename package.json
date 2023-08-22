@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "compile-ts": "tsc --watch",
-    "styles":"npx tailwindcss -i ./styles.css -o ./styles/output.css --watch",
+    "styles": "npx tailwindcss -i ./styles.css -o ./styles/output.css --watch",
     "dev": "concurrently --kill-others \"npm run compile-ts\" \"npm run styles\""
   },
   "keywords": [],

@@ -1,3 +1,3 @@
-import Task from "./classes/Task";
+import App from "./classes/App";
 
-const task = new Task();
+const app = new App();
