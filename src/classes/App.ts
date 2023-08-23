@@ -1,33 +1,40 @@
 import TasksList from './TasksList.js';
-import Task from "./Task.js";
 
 enum HTMLClassesAndIds {
-    ButtonId = 'add-task'
+    ButtonId = 'add-task',
+    IdOfInputWithTask = 'task'
 }
 
 export default class App {
     tasksList: TasksList;
-    addTaskButton: HTMLButtonElement
+    addTaskForm: HTMLFormElement
 
     constructor() {
         this.tasksList = new TasksList();
         this._getButton();
-        console.log('teher!')
     }
 
     _getButton(): void {
         const { ButtonId } = HTMLClassesAndIds;
 
-        this.addTaskButton = document.getElementById(ButtonId) as HTMLButtonElement;
+        this.addTaskForm = document.getElementById(ButtonId) as HTMLFormElement;
         this._setEventOnButton();
     }
 
     _setEventOnButton(): void {
-        console.log(this.addTaskButton);
-        this.addTaskButton.addEventListener('click', this._addNewTask)
+        this.addTaskForm.addEventListener('submit', this._addNewTask)
     }
 
     _addNewTask = (e) => {
+        const { IdOfInputWithTask } = HTMLClassesAndIds;
         e.preventDefault();
+
+        const input = document.getElementById(IdOfInputWithTask) as HTMLInputElement;
+        this.tasksList.addNewTask(input.value);
+        this._resetInputValue(input);
+    }
+
+    _resetInputValue(input: HTMLInputElement) {
+        input.value = '';
     }
 }

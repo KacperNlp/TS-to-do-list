@@ -2,23 +2,29 @@ import TasksList from './TasksList.js';
 var HTMLClassesAndIds;
 (function (HTMLClassesAndIds) {
     HTMLClassesAndIds["ButtonId"] = "add-task";
+    HTMLClassesAndIds["IdOfInputWithTask"] = "task";
 })(HTMLClassesAndIds || (HTMLClassesAndIds = {}));
 export default class App {
     constructor() {
         this._addNewTask = (e) => {
+            const { IdOfInputWithTask } = HTMLClassesAndIds;
             e.preventDefault();
+            const input = document.getElementById(IdOfInputWithTask);
+            this.tasksList.addNewTask(input.value);
+            this._resetInputValue(input);
         };
         this.tasksList = new TasksList();
         this._getButton();
-        console.log('teher!');
     }
     _getButton() {
         const { ButtonId } = HTMLClassesAndIds;
-        this.addTaskButton = document.getElementById(ButtonId);
+        this.addTaskForm = document.getElementById(ButtonId);
         this._setEventOnButton();
     }
     _setEventOnButton() {
-        console.log(this.addTaskButton);
-        this.addTaskButton.addEventListener('click', this._addNewTask);
+        this.addTaskForm.addEventListener('submit', this._addNewTask);
+    }
+    _resetInputValue(input) {
+        input.value = '';
     }
 }

@@ -1,5 +1,6 @@
 export default class Task {
-    constructor() {
-        console.log('Hello there');
+    constructor(text, id) {
+        this.text = text;
+        this.id = id;
     }
 }
