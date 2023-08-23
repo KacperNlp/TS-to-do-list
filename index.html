@@ -9,12 +9,13 @@
 </head>
 
 <body class="bg-slate-800 text-gray-100">
-    <h1 class="text-xl text-center mt-4 mb-12">To do List</h1>
+    <h1 class="text-xl md:text-2xl lg:text-3xl xl:text-4xl text-center mt-4 md:mt-8 mb-12">To do List</h1>
     <section class="w-[90%] max-w-7xl mx-auto text-center">
-        <form id="add-task" class="flex flex-col gap-12">
-            <div class="flex flex-col items-start gap-2">
+        <form id="add-task" class="flex flex-col gap-12 items-center">
+            <div class="flex flex-col items-start gap-2 md:w-3/4 max-w-xl md:shadow-xl md:px-6 md:py-12 md:rounded-lg">
                 <label for="task" class="text-sm text-gray-300">Your task description:</label>
-                <input type="text" id="task" class="px-4 py-2 min-w-[300px] bg-slate-500 border border-slate-300"
+                <input type="text" id="task"
+                    class="px-4 py-2 min-w-[300px] bg-slate-500 border border-slate-300 outline-violet-500"
                     placeholder="Task description...">
             </div>
             <div>
@@ -24,8 +25,12 @@
             </div>
         </form>
     </section>
-    <section>
-        <ul id="tasks-list"></ul>
+    <section class="flex justify-center items-center my-16 md:mt-24">
+        <div>
+            <ul id="tasks-list">
+                <p class="list-placeholder">Right now you don't have any task....</p>
+            </ul>
+        </div>
     </section>
     <script src="./dist/app.js" type="module"></script>
 </body>

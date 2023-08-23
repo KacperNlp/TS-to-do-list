@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .list-placeholder {
+      @apply text-sm text-slate-300;
+    }
+  }
