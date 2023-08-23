@@ -8,16 +8,20 @@
     <link rel="stylesheet" href="./styles/output.css">
 </head>
 
-<body>
-    <h1 class="text-xl">To do List</h1>
-    <section>
-        <form id="add-task">
-            <div>
-                <label for="task"></label>
-                <input type="text" id="task">
+<body class="bg-slate-800 text-gray-100">
+    <h1 class="text-xl text-center mt-4 mb-12">To do List</h1>
+    <section class="w-[90%] max-w-7xl mx-auto text-center">
+        <form id="add-task" class="flex flex-col gap-12">
+            <div class="flex flex-col items-start gap-2">
+                <label for="task" class="text-sm text-gray-300">Your task description:</label>
+                <input type="text" id="task" class="px-4 py-2 min-w-[300px] bg-slate-500 border border-slate-300"
+                    placeholder="Task description...">
             </div>
-
-            <button id="add-task">Add new Task</button>
+            <div>
+                <button id="add-task" class="px-8 py-2 bg-violet-500 hover:bg-violet-600 rounded-lg duration-200">Add
+                    new
+                    Task</button>
+            </div>
         </form>
     </section>
     <section>
