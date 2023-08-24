@@ -3,6 +3,8 @@ const MAX_ID_VALUE = 10000;
 var HTMLClassesAndIds;
 (function (HTMLClassesAndIds) {
     HTMLClassesAndIds["TasksListId"] = "tasks-list";
+    HTMLClassesAndIds["ClassForTaskHTMLElement"] = "task";
+    HTMLClassesAndIds["ClassForButtonToRemove"] = "task-button";
     HTMLClassesAndIds["ClassForMessageWhenListIsEmpty"] = "list-placeholder";
 })(HTMLClassesAndIds || (HTMLClassesAndIds = {}));
 export default class TasksList {
@@ -35,11 +37,12 @@ export default class TasksList {
         }
     }
     _createListElement(text, id) {
+        const { ClassForTaskHTMLElement, ClassForButtonToRemove } = HTMLClassesAndIds;
         const listElement = document.createElement('li');
-        listElement.classList.add('task');
+        listElement.classList.add(ClassForTaskHTMLElement);
         const button = document.createElement('button');
         button.innerText = 'Remove Task';
-        button.classList.add('task-button');
+        button.classList.add(ClassForButtonToRemove);
         button.addEventListener('click', () => {
             this.removeTask(id);
         });

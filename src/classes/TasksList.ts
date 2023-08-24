@@ -4,6 +4,8 @@ const MAX_ID_VALUE = 10000;
 
 enum HTMLClassesAndIds {
     TasksListId = 'tasks-list',
+    ClassForTaskHTMLElement = 'task',
+    ClassForButtonToRemove = 'task-button',
     ClassForMessageWhenListIsEmpty = 'list-placeholder',
 }
 
@@ -48,12 +50,14 @@ export default class TasksList {
     }
 
     _createListElement(text: string, id: number): HTMLLIElement {
+        const { ClassForTaskHTMLElement, ClassForButtonToRemove } = HTMLClassesAndIds;
+
         const listElement = document.createElement('li');
-        listElement.classList.add('task');
+        listElement.classList.add(ClassForTaskHTMLElement);
 
         const button = document.createElement('button');
         button.innerText = 'Remove Task';
-        button.classList.add('task-button');
+        button.classList.add(ClassForButtonToRemove);
 
         button.addEventListener('click', () => {
             this.removeTask(id);
