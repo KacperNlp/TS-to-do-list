@@ -3,7 +3,8 @@ import Task from "./Task.js";
 const MAX_ID_VALUE = 10000;
 
 enum HTMLClassesAndIds {
-    TasksListId = 'tasks-list'
+    TasksListId = 'tasks-list',
+    ClassForMessageWhenListIsEmpty = 'list-placeholder',
 }
 
 export default class TasksList {
@@ -19,26 +20,31 @@ export default class TasksList {
         const id = this._generateTaskId();
         const newTask = new Task(text, id);
         this.tasks.push(newTask);
-        this._appendTasksToHtml();
+        this._generateStructureOfTasksToHtml();
     }
 
     removeTask(idOfTaskToRemove: number) {
         const arrayAfterFiltering = this.tasks.filter(({ text, id }) => id !== idOfTaskToRemove);
 
         this.tasks = arrayAfterFiltering;
+        this._generateStructureOfTasksToHtml();
     }
 
     _generateTaskId(): number {
         return Math.floor(Math.random() * MAX_ID_VALUE);
     }
 
-    _appendTasksToHtml() {
+    _generateStructureOfTasksToHtml() {
         this.tasksContainer.innerHTML = '';
 
         this.tasks.reverse().forEach(({text, id}) => {
             const task = this._createListElement(text, id);
             this.tasksContainer.appendChild(task);
         })
+
+        if(!this.tasks.length) {
+            this._createMessageForEmptyList();
+        }
     }
 
     _createListElement(text: string, id: number): HTMLLIElement {
@@ -46,7 +52,12 @@ export default class TasksList {
         listElement.classList.add('task');
 
         const button = document.createElement('button');
+        button.innerText = 'Remove Task';
         button.classList.add('task-button');
+
+        button.addEventListener('click', () => {
+            this.removeTask(id);
+        })
 
         const textElement = document.createElement('p');
         textElement.innerText = text;
@@ -55,5 +66,15 @@ export default class TasksList {
         listElement.appendChild(textElement);
 
         return listElement;
+    }
+
+    _createMessageForEmptyList() {
+        const { ClassForMessageWhenListIsEmpty } = HTMLClassesAndIds;
+
+        const message = document.createElement('p');
+        message.classList.add(ClassForMessageWhenListIsEmpty);
+        message.innerText = "Right now you don't have any task....";
+
+        this.tasksContainer.appendChild(message);
     }
 }
