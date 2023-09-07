@@ -15,6 +15,7 @@ export default class TasksList {
     addNewTask(text) {
         const id = this._generateTaskId();
         const newTask = new Task(text, id);
+        console.log(this.tasks);
         this.tasks.push(newTask);
         this._generateStructureOfTasksToHtml();
     }
@@ -28,7 +29,8 @@ export default class TasksList {
     }
     _generateStructureOfTasksToHtml() {
         this.tasksContainer.innerHTML = '';
-        this.tasks.reverse().forEach(({ text, id }) => {
+        const tasksList = [...this.tasks];
+        tasksList.reverse().forEach(({ text, id }) => {
             const task = this._createListElement(text, id);
             this.tasksContainer.appendChild(task);
         });
