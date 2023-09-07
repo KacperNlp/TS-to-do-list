@@ -7,6 +7,7 @@ var HTMLClassesAndIds;
     HTMLClassesAndIds["ClassForButtonToRemove"] = "task-button";
     HTMLClassesAndIds["ClassForMessageWhenListIsEmpty"] = "list-placeholder";
     HTMLClassesAndIds["ClassForImportantTask"] = "is-important";
+    HTMLClassesAndIds["ClassForDateEl"] = "date-text";
 })(HTMLClassesAndIds || (HTMLClassesAndIds = {}));
 export default class TasksList {
     constructor() {
@@ -33,7 +34,7 @@ export default class TasksList {
         const tasksList = [...this.tasks];
         tasksList.reverse().forEach((task) => {
             const { text, id, isImportant } = task;
-            const taskHtml = this._createListElement(text, id);
+            const taskHtml = this._createListElement(task, text, id);
             this._addEventOnTask(task, taskHtml);
             if (isImportant) {
                 taskHtml.classList.add(ClassForImportantTask);
@@ -47,8 +48,8 @@ export default class TasksList {
             this._createMessageForEmptyList();
         }
     }
-    _createListElement(text, id) {
-        const { ClassForTaskHTMLElement, ClassForButtonToRemove } = HTMLClassesAndIds;
+    _createListElement(task, text, id) {
+        const { ClassForTaskHTMLElement, ClassForButtonToRemove, ClassForDateEl } = HTMLClassesAndIds;
         const listElement = document.createElement('li');
         listElement.classList.add(ClassForTaskHTMLElement);
         const button = document.createElement('button');
@@ -57,9 +58,13 @@ export default class TasksList {
         button.addEventListener('click', () => {
             this.removeTask(id);
         });
+        const dateHtmlEl = document.createElement('p');
+        dateHtmlEl.classList.add(ClassForDateEl);
+        dateHtmlEl.innerText = task.getDateAsReadableText();
         const textElement = document.createElement('p');
         textElement.innerText = text;
         listElement.appendChild(button);
+        listElement.appendChild(dateHtmlEl);
         listElement.appendChild(textElement);
         return listElement;
     }

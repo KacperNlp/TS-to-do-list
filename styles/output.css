@@ -726,6 +726,13 @@ video {
   background: #a71717;
 }
 
+.date-text {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  font-size: 12px;
+}
+
 .hover\:bg-violet-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(124 58 237 / var(--tw-bg-opacity));

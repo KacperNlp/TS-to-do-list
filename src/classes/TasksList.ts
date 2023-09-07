@@ -7,7 +7,8 @@ enum HTMLClassesAndIds {
     ClassForTaskHTMLElement = 'task',
     ClassForButtonToRemove = 'task-button',
     ClassForMessageWhenListIsEmpty = 'list-placeholder',
-    ClassForImportantTask = 'is-important';
+    ClassForImportantTask = 'is-important',
+    ClassForDateEl = 'date-text'
 }
 
 export default class TasksList {
@@ -45,7 +46,7 @@ export default class TasksList {
 
         tasksList.reverse().forEach((task) => {
             const { text, id, isImportant } = task;
-            const taskHtml = this._createListElement(text, id);
+            const taskHtml = this._createListElement(task, text, id);
 
             this._addEventOnTask(task, taskHtml);
 
@@ -63,8 +64,8 @@ export default class TasksList {
         }
     }
 
-    _createListElement(text: string, id: number): HTMLLIElement {
-        const { ClassForTaskHTMLElement, ClassForButtonToRemove } = HTMLClassesAndIds;
+    _createListElement(task: Task, text: string, id: number): HTMLLIElement {
+        const { ClassForTaskHTMLElement, ClassForButtonToRemove, ClassForDateEl } = HTMLClassesAndIds;
 
         const listElement = document.createElement('li');
         listElement.classList.add(ClassForTaskHTMLElement);
@@ -77,10 +78,15 @@ export default class TasksList {
             this.removeTask(id);
         })
 
+        const dateHtmlEl = document.createElement('p');
+        dateHtmlEl.classList.add(ClassForDateEl);
+        dateHtmlEl.innerText = task.getDateAsReadableText();
+
         const textElement = document.createElement('p');
         textElement.innerText = text;
 
         listElement.appendChild(button);
+        listElement.appendChild(dateHtmlEl);
         listElement.appendChild(textElement);
 
         return listElement;
