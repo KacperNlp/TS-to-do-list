@@ -7,6 +7,7 @@ enum HTMLClassesAndIds {
     ClassForTaskHTMLElement = 'task',
     ClassForButtonToRemove = 'task-button',
     ClassForMessageWhenListIsEmpty = 'list-placeholder',
+    ClassForImportantTask = 'is-important';
 }
 
 export default class TasksList {
@@ -20,8 +21,7 @@ export default class TasksList {
 
     addNewTask(text: string) {
         const id = this._generateTaskId();
-        const newTask = new Task(text, id);
-        console.log(this.tasks);
+        const newTask = new Task(text, id, false);
         this.tasks.push(newTask);
         this._generateStructureOfTasksToHtml();
     }
@@ -38,12 +38,24 @@ export default class TasksList {
     }
 
     _generateStructureOfTasksToHtml() {
+        const { ClassForImportantTask } = HTMLClassesAndIds;
+
         this.tasksContainer.innerHTML = '';
         const tasksList = [...this.tasks];
 
-        tasksList.reverse().forEach(({text, id}) => {
-            const task = this._createListElement(text, id);
-            this.tasksContainer.appendChild(task);
+        tasksList.reverse().forEach((task) => {
+            const { text, id, isImportant } = task;
+            const taskHtml = this._createListElement(text, id);
+
+            this._addEventOnTask(task, taskHtml);
+
+            if(isImportant) {
+                taskHtml.classList.add(ClassForImportantTask);
+            } else {
+                taskHtml.classList.remove(ClassForImportantTask);
+            }
+
+            this.tasksContainer.appendChild(taskHtml);
         })
 
         if(!this.tasks.length) {
@@ -82,5 +94,12 @@ export default class TasksList {
         message.innerText = "Right now you don't have any task....";
 
         this.tasksContainer.appendChild(message);
+    }
+
+    _addEventOnTask(task: Task, taskHtml: HTMLLIElement) {
+        taskHtml.addEventListener('click', () => {
+            task.toggleTaskPriority();
+            this._generateStructureOfTasksToHtml();
+        })
     }
 }
