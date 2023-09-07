@@ -21,7 +21,6 @@ export default class Task {
 
     getDateAsReadableText(): string {
         const dateAsString = this.date.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"});
-        console.log(dateAsString);
         
         return dateAsString;
     }

@@ -58,3 +58,42 @@
   left: 20px;
   font-size: 12px;
 }
+
+.layer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, .5);
+}
+
+.box-error-message {
+  position: relative;
+  width: 90%;
+  max-width: 300px;
+  padding: 30px 20px;
+  background: #222;
+  color: #aaa;
+  text-align: center;
+}
+
+.error-btn {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 20px;
+  height: 20px;
+  background: #c01818;
+  color: #eee;
+  font-size: 12px;
+  border-radius: 4px;
+  transition: .3s;
+}
+
+.error-btn:hover {
+  transform: scale(1.1);
+}
